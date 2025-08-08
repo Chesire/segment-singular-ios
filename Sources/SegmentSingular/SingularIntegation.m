@@ -7,8 +7,8 @@
 //
 
 #import "SingularIntegation.h"
-#import <Analytics/SEGAnalyticsConfiguration.h>
-#import <Analytics/SEGAnalytics.h>
+#import <Segment/SEGAnalyticsConfiguration.h>
+#import <Segment/SEGAnalytics.h>
 #import "Singular.h"
 #import "SingularConfig.h"
 
