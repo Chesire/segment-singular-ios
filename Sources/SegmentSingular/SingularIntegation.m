@@ -7,10 +7,8 @@
 //
 
 #import "SingularIntegation.h"
-#import <Segment/SEGAnalyticsConfiguration.h>
-#import <Segment/SEGAnalytics.h>
-#import "Singular.h"
-#import "SingularConfig.h"
+@import Segment;
+@import Singular;
 
 #define SEGMENT_WRAPPER_NAME @"Segment"
 #define SEGMENT_WRAPPER_VERSION @"1.2.0"
