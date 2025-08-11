@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@import Segment;
+#import <Analytics/SEGIntegrationFactory.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
