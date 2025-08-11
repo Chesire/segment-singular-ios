@@ -1,5 +1,0 @@
-module SegmentSingular {
-    umbrella header "SegmentSingular.h"
-    export *
-    module * { export * }
-}
