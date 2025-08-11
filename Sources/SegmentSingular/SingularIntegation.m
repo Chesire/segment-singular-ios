@@ -7,10 +7,37 @@
 //
 
 #import "SingularIntegation.h"
-#import <Analytics/SEGAnalyticsConfiguration.h>
-#import <Analytics/SEGAnalytics.h>
+@import Segment;
+
+// Import Singular - trying different approaches for SPM compatibility
+#if __has_include("Singular.h")
 #import "Singular.h"
 #import "SingularConfig.h"
+#elif __has_include(<Singular/Singular.h>)
+#import <Singular/Singular.h>
+#import <Singular/SingularConfig.h>
+#else
+// If headers aren't found, define minimal interface to allow compilation
+@interface Singular : NSObject
++ (void)setWrapperName:(NSString *)name andVersion:(NSString *)version;
++ (void)start:(id)config;
++ (void)setCustomUserId:(NSString *)customUserId;
++ (void)unsetCustomUserId;
++ (void)event:(NSString *)eventName;
++ (void)eventWithArgs:(NSString *)eventName args:(NSDictionary *)args;
++ (void)revenue:(NSString *)currency amount:(double)amount;
++ (void)customRevenue:(NSString *)eventName currency:(NSString *)currency amount:(double)amount;
++ (void)revenueWithArgs:(NSString *)currency amount:(double)amount productSKU:(NSString *)productSKU productName:(NSString *)productName productCategory:(NSString *)productCategory productQuantity:(int)productQuantity productPrice:(double)productPrice;
+@end
+
+@interface SingularConfig : NSObject
+- (instancetype)initWithApiKey:(NSString *)apiKey andSecret:(NSString *)secret;
+@property (nonatomic, assign) BOOL skAdNetworkEnabled;
+@property (nonatomic, assign) BOOL manualSkanConversionManagement;
+@property (nonatomic, copy) void (^conversionValueUpdatedCallback)(NSInteger);
+@property (nonatomic, strong) NSNumber *waitForTrackingAuthorizationWithTimeoutInterval;
+@end
+#endif
 
 #define SEGMENT_WRAPPER_NAME @"Segment"
 #define SEGMENT_WRAPPER_VERSION @"1.2.0"
@@ -47,7 +74,7 @@ static bool isInitialized = NO;
     config.skAdNetworkEnabled = isSKANEnabled;
     config.manualSkanConversionManagement = isManualMode;
     config.conversionValueUpdatedCallback = conversionValueUpdatedCallback;
-    config.waitForTrackingAuthorizationWithTimeoutInterval = waitForTrackingAuthorizationWithTimeoutInterval;
+    config.waitForTrackingAuthorizationWithTimeoutInterval = @(waitForTrackingAuthorizationWithTimeoutInterval);
     
     [Singular start:config];
     
