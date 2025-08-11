@@ -28,9 +28,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Segment", package: "analytics-ios"),
                 .product(name: "Singular", package: "Singular-iOS-SDK")
-            ],
-            path: "Sources/SegmentSingular",
-            publicHeadersPath: "include"
+            ]
         )
     ]
 )
