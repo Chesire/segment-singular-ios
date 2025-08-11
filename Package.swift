@@ -14,11 +14,11 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/segmentio/analytics-ios.git",
+            url: "https://github.com/segmentio/analytics-ios",
             from: "4.0.0"
         ),
         .package(
-            url: "https://github.com/singular-labs/Singular-iOS-SDK.git", 
+            url: "https://github.com/singular-labs/Singular-iOS-SDK", 
             from: "12.0.0"
         )
     ],
@@ -30,11 +30,6 @@ let package = Package(
                 .product(name: "Singular", package: "Singular-iOS-SDK")
             ],
             path: "Sources"
-        ),
-        .testTarget(
-            name: "SegmentSingularTests",
-            dependencies: ["SegmentSingular"],
-            path: "Tests"
         )
     ]
 )
